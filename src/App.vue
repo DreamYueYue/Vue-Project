@@ -1,6 +1,10 @@
 <template>
     <div class="app-content">
-        <mt-header fixed title="我的Vue项目"></mt-header>
+        <mt-header fixed title="我的Vue项目">
+            <span @click="goback" slot="left" v-show="flag">
+                <mt-button icon="back">返回</mt-button>
+            </span>
+        </mt-header>
         <transition>
             <router-view></router-view>
         </transition>
@@ -14,7 +18,7 @@
                 <span class="mui-tab-label">会员</span>
             </router-link>
             <router-link class="mui-tab-item-wy" to="/shopcar">
-                <span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span class="mui-badge" id="badge">0</span></span>
+                <span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span class="mui-badge" id="badge">{{$store.getters.getAllNumber}}</span></span>
                 <span class="mui-tab-label">购物车</span>
             </router-link>
             <router-link class="mui-tab-item-wy" to="/search">
@@ -25,6 +29,33 @@
     </div>
 </template>
 <script type="text/javascript">
+export default {
+    data() {
+        return {
+            flag: true
+        };
+    },
+    created() {
+        this.init();
+    },
+    methods: {
+        goback() {
+            this.$router.go(-1);
+        },
+        init() {
+            this.flag = (this.$route.path == "/home") ? false : true;
+        }
+    },
+    watch: {
+        "$route.path": function(newValue) {
+            if (newValue == '/home') {
+                this.flag = false;
+            } else {
+                this.flag = true;
+            }
+        }
+    }
+}
 </script>
 <style type="text/css" scoped>
 .app-content {

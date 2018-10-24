@@ -46,10 +46,11 @@
 </template>
 <script type="text/javascript">
 import swpper from '../../common/Swpper.vue';
-import numberBox from '../../common/NumberBox.vue';
+import numberBox from '../../common/GoodsInfoNumberBox.vue';
 export default {
     data() {
         return {
+            id: this.$route.params.id,
             imgList: [{
                 id: 1,
                 src: '../../../../src/images/goods_img/magazine-unlock-02-2.3.810-_6091b088fcb74b00bde6ec93e69f1e9f.jpg'
@@ -67,6 +68,13 @@ export default {
     methods: {
         addToShopCar() {
             this.showBall = !this.showBall;
+            var goodsInfo = {
+                id: this.id,
+                number: this.selectCount,
+                price: 2199,
+                selected: true
+            };
+            this.$store.commit('addToCar', goodsInfo);
         },
         beforeEnter(el) {
             el.style.transform = 'translate(0,0)';
@@ -78,7 +86,7 @@ export default {
             const distY = carPosition.top - ballPosition.top;
             el.offsetWidth;
             el.style.transform = `translate(${distX}px,${distY}px)`;
-            el.style.transition = 'all 1s cubic-bezier(.4,-0.3,1,.68)';
+            el.style.transition = 'all .5s cubic-bezier(.4,-0.3,1,.68)';
             done();
         },
         afterEnter(el) {
