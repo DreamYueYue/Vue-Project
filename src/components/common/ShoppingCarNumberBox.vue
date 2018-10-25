@@ -6,7 +6,7 @@
     </div>
 </template>
 <script type="text/javascript">
-import mui from '../../lib/mui/dist/js/mui.min.js';
+import mui from '../../lib/mui/dist/js/mui.js';
 export default {
     data() {
         return {};
