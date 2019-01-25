@@ -1,0 +1,39 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title> 页面名称 </title>
+<style type="text/css">
+html,body {
+	height: 100%;
+	margin: 0;
+}
+#d {
+	position: absolute;
+	left: 500px;
+	top: 200px;
+	width: 200px;
+	height: 200px;
+	background-color: #f99;
+	transform: translate(0px,0px);
+	transition: transform 30ms;
+}
+
+</style>
+</head>
+<body>
+<div id="d"></div>
+<script type="text/javascript">
+document.onmousemove = function (e) {
+	e = e||window.event;
+	var x = 0.5-e.clientX/document.body.offsetWidth;
+    var y = 0.5-e.clientY/document.body.offsetHeight;
+    console.log(x);
+    console.log(y);
+	document.getElementById("d").style.transform = "translate("+x*100+"px,"+y*100+"px)";
+};
+</script>
+</body>
+</html>
